@@ -14,9 +14,10 @@ for id in $(podman ps -q); do
 	if [[ $is_active ]]; then
 		
 		archive_name="$id.tar"
-		tar -cvf "$backup_dir/$archive_name" "$is_active"
+		#cd $is_active
+		tar -cf "$backup_dir/$archive_name" -C "$is_active" .
 		echo "backed up $id to $backup_dir/$archive_name"
 	else
-		echo "not happening"
+		echo "Volume not found for" $id
 	fi
 done
